@@ -45,8 +45,10 @@ src/
   components/       — small reusable pieces used across pages
     Navbar.jsx / .css
     Footer.jsx / .css
-    SocialLinks.jsx / .css
+    SocialLinks.jsx / .css   — icon links, see "Social icons" below
     ImagePlaceholder.jsx / .css
+    icons/
+      MoonMark.jsx    — small decorative crescent-moon brand glyph
   pages/            — one file per site page, each with a matching .css
     Home.jsx / .css
     Bio.jsx / .css
@@ -81,7 +83,10 @@ in `src/data/`:
 - **Shows** → `src/data/shows.js` (automatically sorted into
   Upcoming/Past on the Shows page based on today's date)
 - **Music releases** → `src/data/releases.js` (newest first)
-- **Merch** → `src/data/merch.js`
+- **Merch** → `src/data/merch.js` (not wired up yet — the Merch page is
+  currently a "coming soon" placeholder since there's nothing to sell.
+  See the comment at the top of `src/pages/Merch.jsx` for how to turn
+  it into a real catalog page once you have merch.)
 - **Band members** → `src/data/members.js`
 
 Each of these files has comments describing every field.
@@ -100,7 +105,8 @@ steps to swap a placeholder for a real `<img>`.
 ## Fonts
 
 The site loads two Google Fonts via `<link>` tags in `index.html`:
-**Fraunces** (headings) and **Space Mono** (nav, labels, body text). To
+**Montserrat** (headings — used uppercase and letter-spaced for a
+wordmark/logo feel) and **Space Mono** (nav, labels, body text). To
 change the look, either:
 
 - Swap the Google Fonts URL in `index.html` for different font
@@ -113,10 +119,28 @@ change the look, either:
 
 ## Colors & theme
 
-All colors, fonts, and spacing are defined as CSS custom properties
-(variables) at the top of `src/styles/global.css` under the "DESIGN
-TOKENS" comment. Changing a value there updates it everywhere it's used
-across the site — that's the one place to go to reskin the whole site.
+The current look is a dark, atmospheric "night sky" theme (deep teal
+background, warm crescent-moon gold accent, off-white "moonlight" text,
+plus a subtle grain texture) based on the band's cover art. All colors,
+fonts, and spacing are defined as CSS custom properties (variables) at
+the top of `src/styles/global.css` under the "DESIGN TOKENS" comment.
+Changing a value there updates it everywhere it's used across the site —
+that's the one place to go to reskin the whole site.
+
+The small crescent-moon glyph next to the wordmark (`src/components/icons/MoonMark.jsx`)
+and the film-grain overlay (`body::after` in `global.css`) are both a
+nod to that cover art, generated in CSS/SVG rather than using the actual
+photo.
+
+## Social icons
+
+The Instagram/TikTok/YouTube/Spotify links (`src/components/SocialLinks.jsx`)
+use real brand icons from the [`react-icons`](https://react-icons.github.io/react-icons/)
+package (its "Simple Icons" set), so it's obvious at a glance which
+platform each link goes to. They render in a single color matching the
+site's theme rather than each brand's official multicolor style — see
+the comment at the top of that file if you'd rather add more platforms
+or swap in a different icon set.
 
 ## The contact form
 
@@ -155,6 +179,8 @@ config changes over time).
 - [React](https://react.dev/) 19 — UI library
 - [Vite](https://vite.dev/) — dev server & build tool
 - [React Router](https://reactrouter.com/) — client-side page routing
+- [react-icons](https://react-icons.github.io/react-icons/) — brand icons
+  for the social links
 - Plain CSS (no framework) using CSS custom properties for theming —
   kept intentionally simple/dependency-light since this project is also
   meant as a learning exercise for React
