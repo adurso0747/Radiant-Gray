@@ -1,0 +1,14 @@
+# Netlify redirects file — https://docs.netlify.com/routing/redirects/
+#
+# This is a static site with client-side routing (React Router): only
+# index.html actually exists as a file, and pages like /shows or /bio
+# are handled entirely in the browser by JavaScript after it loads. A
+# static host doesn't know that by default — request /shows directly
+# (or refresh the page while on it) and it looks for a literal file at
+# that path, finds nothing, and 404s.
+#
+# This rule tells Netlify: for any path that doesn't match a real file
+# (an image, a CSS file, etc), serve index.html instead (with a 200,
+# not a redirect the browser would notice) and let React Router take it
+# from there.
+/*    /index.html   200

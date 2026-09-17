@@ -37,6 +37,8 @@ public/
   admin/            — the content admin panel (Decap CMS), served at /admin
     index.html
     config.yml      — defines what the admin panel can edit, and how
+  _redirects        — makes client-side routing (React Router) work on
+                      Netlify/Cloudflare Pages — see "Deployment" below
 index.html          — the single HTML page; loads fonts and src/main.jsx
 vite.config.js      — build config; also makes /admin work in local dev
 src/
@@ -283,16 +285,26 @@ Connect this Git repository through the Netlify dashboard and set:
 - Build command: `npm run build`
 - Publish directory: `dist`
 
-Netlify also automatically handles "client-side routing" correctly (so
-refreshing `/shows` doesn't 404), can wire up the contact form (Netlify
-Forms) with minimal setup, and is what the admin panel's login
-(Identity + Git Gateway) is built around — see "Managing content with
-the admin panel" above.
+`public/_redirects` (copied into every build) is what makes
+"client-side routing" work on Netlify — without it, refreshing on
+`/shows` or linking straight to `/contact` would 404, since those pages
+only exist as far as React Router is concerned, not as real files.
+Netlify is also what the contact form (Netlify Forms) and the admin
+panel's login (Identity + Git Gateway) are both built around — see "The
+contact form" and "Managing content with the admin panel" above.
 
-**Vercel / Cloudflare Pages:** Same build command/output directory as
-above; both handle client-side routing automatically too. The admin
-panel still works on these hosts, just with a bit more auth setup (see
-the note in "Managing content with the admin panel").
+**Cloudflare Pages:** Same build command/output directory as above, and
+also honors `public/_redirects` (same file format as Netlify), so
+client-side routing works the same way. The admin panel would need a
+different setup, though — it's built around Netlify Identity/Git
+Gateway specifically.
+
+**Vercel:** Same build command/output directory, but needs its own
+config instead of `_redirects` — a `vercel.json` with a rewrite rule
+sending everything to `/index.html` (see Vercel's docs on SPA
+rewrites). The contact form and admin panel would both need different
+approaches too (Vercel doesn't have Netlify Forms or Identity/Git
+Gateway equivalents built in).
 
 **GitHub Pages:** GitHub Pages serves project sites from a sub-path
 (`https://username.github.io/repo-name/`), so you'll need to set
