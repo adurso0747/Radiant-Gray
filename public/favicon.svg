@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <!--
+    Placeholder favicon: a crescent moon on the site's night-sky
+    background, matching the theme in src/styles/global.css. Swap this
+    for a real logo whenever you have one — just replace this file
+    (keep the filename "favicon.svg", referenced from index.html).
+  -->
+  <rect width="48" height="48" rx="8" fill="#0b1e26" />
+  <path
+    fill="#e7c873"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M24 8c8.837 0 16 7.163 16 16s-7.163 16-16 16S8 32.837 8 24 15.163 8 24 8Zm3.5 4.8a12.4 12.4 0 0 0 0 22.4A12.4 12.4 0 1 1 27.5 12.8Z"
+  />
+</svg>

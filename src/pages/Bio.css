@@ -1,0 +1,42 @@
+.bio-page__portrait {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin-top: var(--space-lg);
+}
+
+.bio-page__copy {
+  max-width: 65ch;
+  margin: var(--space-lg) 0 var(--space-xl);
+}
+
+.bio-page__members-heading {
+  margin-bottom: var(--space-md);
+}
+
+.bio-page__members {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-lg);
+}
+
+.member-card__photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.member-card h3 {
+  margin-top: var(--space-sm);
+  margin-bottom: 0.15rem;
+  font-size: 1.1rem;
+}
+
+.member-card__instrument {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-soft);
+  margin: 0;
+}

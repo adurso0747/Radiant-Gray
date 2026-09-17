@@ -1,0 +1,28 @@
+{
+  "members": [
+    {
+      "name": "Jared",
+      "instrument": "Vocals / Guitar",
+      "photo": "/images/members/jared.jpg",
+      "photoAlt": "Portrait of Jared"
+    },
+    {
+      "name": "Alex",
+      "instrument": "Vocals / Guitar",
+      "photo": "/images/members/alex.jpg",
+      "photoAlt": "Portrait of Alex"
+    },
+    {
+      "name": "Eric",
+      "instrument": "Bass",
+      "photo": "/images/members/eric.jpg",
+      "photoAlt": "Portrait of Eric"
+    },
+    {
+      "name": "Weston",
+      "instrument": "Drums",
+      "photo": "/images/members/weston.jpg",
+      "photoAlt": "Portrait of Weston"
+    }
+  ]
+}

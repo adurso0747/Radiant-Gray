@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radiant Gray — Admin</title>
+
+    <!--
+      This page is intentionally NOT part of the React app (it's not
+      loaded through src/main.jsx or App.jsx) — it's a separate static
+      HTML page that loads Decap CMS, a pre-built content-editing UI,
+      straight from a CDN. Vite serves everything in public/ as-is, so
+      this file is simply available at /admin/ once the site is
+      deployed (or during `npm run dev`).
+
+      See README.md's "Managing content with the admin panel" section
+      for the one-time setup this needs (enabling Netlify Identity +
+      Git Gateway) before it actually works.
+    -->
+  </head>
+  <body>
+    <!-- Netlify Identity widget: handles login for this page when the
+         site is deployed on Netlify with Identity + Git Gateway
+         enabled. Only loaded here on the admin page, not on the rest
+         of the site, so regular visitors never download it. -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://unpkg.com/decap-cms@^3.16.2/dist/decap-cms.js"></script>
+    <script>
+      // Netlify Identity invite/confirmation emails link back to the
+      // site's homepage by default. If someone lands here after
+      // clicking one of those links (or is simply already logged out),
+      // this re-opens the login modal right on this page instead of
+      // sending them looking for it.
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', (user) => {
+          if (!user) {
+            window.netlifyIdentity.on('login', () => {
+              document.location.reload();
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Radiant Gray — midwest emo band. Shows, music, merch, and more."
+    />
+
+    <!--
+      Google Fonts used for the site's moody, "night sky" look:
+        - Montserrat: a clean geometric sans, used uppercase + tracked
+          out for headings — like the band's wordmark/logo treatment
+        - Space Mono: a monospace font for nav links, labels, and dates,
+          giving things a little DIY/utilitarian contrast
+
+      If you'd rather not depend on Google Fonts (e.g. for privacy or
+      offline builds), you can self-host these instead — see the "Fonts"
+      section in README.md for pointers.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- This is overridden per-page via the usePageTitle hook, see src/hooks/usePageTitle.js -->
+    <title>Radiant Gray</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!--
+      Netlify Forms setup for the Contact page (src/pages/Contact.jsx).
+      Netlify detects forms by scanning the plain HTML it deploys — but
+      this site's actual contact form only exists once React renders it
+      in the browser, which happens too late for Netlify to see it. This
+      hidden, plain-HTML copy (never shown, never used directly) is what
+      Netlify's build actually reads to register the form and its
+      fields; it must be kept in sync with the real form's `name` and
+      field `name`s by hand if you ever add/remove a field there.
+
+      No effect if you deploy somewhere other than Netlify — this markup
+      is simply inert.
+    -->
+    <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+  </body>
+</html>

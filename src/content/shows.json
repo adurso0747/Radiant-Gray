@@ -1,0 +1,54 @@
+{
+  "shows": [
+    {
+      "date": "2026-07-26",
+      "venue": "Century Bar",
+      "city": "Philadelphia",
+      "state": "PA",
+      "ticketUrl": "https://example.com/tickets",
+      "infoUrl": null,
+      "soldOut": false,
+      "supportedBy": ["Invis", "Outline Soul"]
+    },
+    {
+      "date": "2026-08-28",
+      "venue": "Water Tower Live Music and Bar",
+      "city": "Philadelphia",
+      "state": "PA",
+      "ticketUrl": "https://example.com/tickets",
+      "infoUrl": null,
+      "soldOut": false,
+      "supportedBy": ["Dinner With Myself", "Mulberry Hill,", "Into Sunday"]
+    },
+    {
+      "date": "2026-09-12",
+      "venue": "Little Big Planet",
+      "city": "Philadelphia",
+      "state": "PA",
+      "ticketUrl": "https://example.com/tickets",
+      "infoUrl": null,
+      "soldOut": false,
+      "supportedBy": ["Queasy", "Phantom Wave"]
+    },
+    {
+      "date": "2026-10-23",
+      "venue": "The Rusty Nail Tavern",
+      "city": "Ardmore",
+      "state": "PA",
+      "ticketUrl": null,
+      "infoUrl": null,
+      "soldOut": false,
+      "supportedBy": []
+    },
+    {
+      "date": "2026-11-07",
+      "venue": "Rowan University",
+      "city": "Glassboro",
+      "state": "NJ",
+      "ticketUrl": null,
+      "infoUrl": null,
+      "soldOut": false,
+      "supportedBy": []
+    }
+  ]
+}

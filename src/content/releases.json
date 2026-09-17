@@ -1,0 +1,31 @@
+{
+  "releases": [
+    {
+      "title": "My Fatal Flaw",
+      "type": "Single",
+      "year": 2026,
+      "coverImage": "/images/releases/my-fatal-flaw.jpg",
+      "coverAlt": "Cover art for the single My Fatal Flaw",
+      "streamingUrl": "https://open.spotify.com/album/1RLtzAgJL4IO9U3lZn6YI2",
+      "bandcampUrl": "https://radiantgray1.bandcamp.com/track/my-fatal-flaw"
+    },
+    {
+      "title": "Radiant Gray II",
+      "type": "Album",
+      "year": 2025,
+      "coverImage": "/images/releases/radiant-gray-ii.jpg",
+      "coverAlt": "Cover art for the album Radiant Gray II",
+      "streamingUrl": null,
+      "bandcampUrl": "https://radiantgray1.bandcamp.com/album/radiant-gray-ii"
+    },
+    {
+      "title": "Radiant Gray",
+      "type": "Album",
+      "year": 2024,
+      "coverImage": "/images/releases/radiant-gray.jpg",
+      "coverAlt": "Cover art for the self-titled album Radiant Gray",
+      "streamingUrl": null,
+      "bandcampUrl": "https://radiantgray1.bandcamp.com/album/radiant-gray"
+    }
+  ]
+}

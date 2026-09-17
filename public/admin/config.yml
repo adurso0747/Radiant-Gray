@@ -1,0 +1,209 @@
+# Decap CMS configuration
+# ------------------------
+# This is the whole admin panel's setup: where content lives, how to
+# authenticate, and what form fields to show for each type of content.
+# See README.md → "Managing content with the admin panel" for the
+# one-time hosting setup this needs, and how to use it day to day.
+#
+# Full reference: https://decapcms.org/docs/configuration-options/
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Lets the CMS run against a local `decap-server` process (see the
+# "cms" script in package.json) instead of real GitHub auth — so you
+# can try out/test the admin panel on your own machine before ever
+# deploying. It only kicks in when the CMS is opened from localhost, so
+# it's safe to leave this in for the real, deployed site too.
+local_backend: true
+
+# Everywhere the fields below use an "image" widget, uploads land in
+# this folder by default (individual fields override it to organize
+# uploads into subfolders — see "media_folder"/"public_folder" below).
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "shows"
+    label: "Shows"
+    description: "Tour dates — shown on the Shows page and the Home page's Next Show card."
+    files:
+      - name: "shows"
+        label: "Shows"
+        file: "src/content/shows.json"
+        fields:
+          - name: shows
+            label: Shows
+            widget: list
+            label_singular: "Show"
+            summary: "{{date}} — {{venue}}, {{city}}"
+            fields:
+              - {
+                  name: date,
+                  label: Date,
+                  widget: datetime,
+                  format: "YYYY-MM-DD",
+                  time_format: false,
+                  picker_utc: true,
+                }
+              - { name: venue, label: Venue, widget: string }
+              - { name: city, label: City, widget: string }
+              - { name: state, label: "State / Region", widget: string }
+              - {
+                  name: ticketUrl,
+                  label: "Ticket URL",
+                  widget: string,
+                  required: false,
+                  hint: "Link to an actual ticket-purchase page. Leave blank if there isn't one — most DIY/house shows don't have one.",
+                }
+              - {
+                  name: infoUrl,
+                  label: "Event Info URL",
+                  widget: string,
+                  required: false,
+                  hint: "Facebook/Instagram event post, venue page, etc. Only shown when there's no Ticket URL.",
+                }
+              - { name: soldOut, label: "Sold Out?", widget: boolean, default: false }
+              - name: supportedBy
+                label: "Supporting Bands"
+                widget: list
+                required: false
+                field: { name: band, label: "Band Name", widget: string }
+
+  - name: "releases"
+    label: "Music"
+    description: "Albums/EPs/singles — shown on the Music page and the Home page's Latest Release card. Put your newest release at the top of the list."
+    files:
+      - name: "releases"
+        label: "Releases"
+        file: "src/content/releases.json"
+        fields:
+          - name: releases
+            label: Releases
+            widget: list
+            label_singular: "Release"
+            summary: "{{title}} ({{year}})"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: type, label: Type, widget: select, options: ["Album", "EP", "Single"] }
+              - { name: year, label: Year, widget: number, value_type: int }
+              - {
+                  name: coverImage,
+                  label: "Cover Art",
+                  widget: image,
+                  media_folder: "public/images/releases",
+                  public_folder: "/images/releases",
+                }
+              - { name: coverAlt, label: "Cover Art Description (for screen readers)", widget: string }
+              - {
+                  name: streamingUrl,
+                  label: "Streaming URL (Spotify, Apple Music, etc)",
+                  widget: string,
+                  required: false,
+                  hint: "Leave blank for a Bandcamp-only release — the Listen button won't show up.",
+                }
+              - { name: bandcampUrl, label: "Bandcamp URL", widget: string, required: false }
+
+  - name: "merch"
+    label: "Merch"
+    description: "Not live on the site yet — the Merch page shows a \"coming soon\" message until it's switched on (see the comment at the top of src/pages/Merch.jsx). Safe to fill in ahead of time."
+    files:
+      - name: "merch"
+        label: "Merch Items"
+        file: "src/content/merch.json"
+        fields:
+          - name: merchItems
+            label: "Merch Items"
+            widget: list
+            label_singular: "Item"
+            summary: "{{name}} ({{price}})"
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: price, label: Price, widget: string, hint: "e.g. $20" }
+              - { name: category, label: Category, widget: string, hint: "Shirt, Vinyl, Tape, Poster, etc." }
+              - {
+                  name: image,
+                  label: "Product Photo",
+                  widget: image,
+                  required: false,
+                  media_folder: "public/images/merch",
+                  public_folder: "/images/merch",
+                }
+              - { name: imageAlt, label: "Photo Description (for screen readers)", widget: string }
+              - { name: buyUrl, label: "Buy URL", widget: string, required: false }
+              - { name: soldOut, label: "Sold Out?", widget: boolean, default: false }
+
+  - name: "members"
+    label: "Band Members"
+    description: "Shown on the Bio page."
+    files:
+      - name: "members"
+        label: "Members"
+        file: "src/content/members.json"
+        fields:
+          - name: members
+            label: Members
+            widget: list
+            label_singular: "Member"
+            summary: "{{name}}"
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: instrument, label: "Instrument / Role", widget: string }
+              - {
+                  name: photo,
+                  label: Photo,
+                  widget: image,
+                  media_folder: "public/images/members",
+                  public_folder: "/images/members",
+                }
+              - { name: photoAlt, label: "Photo Description (for screen readers)", widget: string }
+
+  - name: "settings"
+    label: "Site Settings"
+    description: "Band info, social links, and the Home/Bio page photos & text."
+    files:
+      - name: "site"
+        label: "Site Settings"
+        file: "src/content/site.json"
+        fields:
+          - name: band
+            label: "Band Info"
+            widget: object
+            fields:
+              - { name: name, label: "Band Name", widget: string }
+              - { name: tagline, label: Tagline, widget: string, hint: "Shown in the Home page hero. Keep it to one sentence." }
+              - { name: location, label: Location, widget: string, hint: "e.g. Philadelphia, PA" }
+              - { name: email, label: "Contact Email", widget: string }
+              - {
+                  name: bookingEmail,
+                  label: "Booking Email",
+                  widget: string,
+                  required: false,
+                  hint: "Optional — leave blank to just use the Contact Email above everywhere.",
+                }
+          - name: socialLinks
+            label: "Social Links"
+            widget: object
+            fields:
+              - { name: instagram, label: Instagram, widget: string, required: false }
+              - { name: tiktok, label: TikTok, widget: string, required: false }
+              - { name: youtube, label: YouTube, widget: string, required: false }
+              - { name: spotify, label: Spotify, widget: string, required: false }
+          - name: home
+            label: "Home Page"
+            widget: object
+            fields:
+              - { name: heroImage, label: "Hero Photo", widget: image }
+              - { name: heroImageAlt, label: "Hero Photo Description (for screen readers)", widget: string }
+          - name: bio
+            label: "Bio Page"
+            widget: object
+            fields:
+              - { name: portraitImage, label: "Band Portrait Photo", widget: image }
+              - { name: portraitImageAlt, label: "Portrait Description (for screen readers)", widget: string }
+              - name: paragraphs
+                label: "Bio Story"
+                widget: list
+                label_singular: Paragraph
+                field: { name: paragraph, label: Paragraph, widget: text }

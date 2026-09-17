@@ -1,0 +1,27 @@
+{
+  "band": {
+    "name": "Radiant Gray",
+    "tagline": "We make bittersweet music for bittersweet people.",
+    "location": "Philadelphia, PA",
+    "email": "radiantgrayofficial@gmail.com",
+    "bookingEmail": null
+  },
+  "socialLinks": {
+    "instagram": "https://www.instagram.com/radiantgrayband",
+    "tiktok": "https://www.tiktok.com/@radiantgrayband",
+    "youtube": "https://www.youtube.com/@radiantgrayband",
+    "spotify": "https://open.spotify.com/artist/1Pu2AUDeYDwKXcc12D3QwK"
+  },
+  "home": {
+    "heroImage": "/images/hero.jpg",
+    "heroImageAlt": "Radiant Gray sitting together in a field at dusk"
+  },
+  "bio": {
+    "portraitImage": "/images/bio-portrait.jpg",
+    "portraitImageAlt": "Radiant Gray standing together in front of a yellow brick wall",
+    "paragraphs": [
+      "Radiant Gray started when four like minded musicians started looking for a creative outlet online. Currently based in the greater Philadelphia area, they're known for their distictive blend of rock, emo, and shoegaze influences.",
+      "With young people feeling more disconnected than ever, Radiant Gray seeks to create a community through music. Our mission is to bring DIY back to Philly and throw shows that allow people to forget their troubles for a night."
+    ]
+  }
+}

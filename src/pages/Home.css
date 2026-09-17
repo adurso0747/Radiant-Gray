@@ -1,0 +1,95 @@
+/* ---- Hero ---- */
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.hero__image {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.hero__location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.hero__tagline {
+  font-size: 1.1rem;
+  color: var(--color-text-soft);
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 800px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__image {
+    order: -1; /* image above text on small screens */
+  }
+}
+
+/* ---- Teasers ---- */
+
+.teasers {
+  background-color: var(--color-bg-alt);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.teasers__grid {
+  display: grid;
+  /* Two big columns, collapsing to one on narrow screens — a wide
+     min-width keeps these cards large/prominent rather than packing in
+     more columns as the viewport grows. */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-lg);
+}
+
+.teaser-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.teaser-card h3 {
+  font-size: 1.6rem;
+}
+
+.teaser-card__meta {
+  font-family: var(--font-mono);
+  color: var(--color-text-soft);
+  margin-bottom: var(--space-xs);
+}
+
+/* Pushed to the bottom of the card (`margin-top: auto` inside a flex
+   column) so both cards' buttons land on the same line even when the
+   text above is a different length. */
+.teaser-card__cta {
+  margin-top: auto;
+  padding-top: var(--space-sm);
+}
+
+.teaser-card__tba {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-soft);
+}

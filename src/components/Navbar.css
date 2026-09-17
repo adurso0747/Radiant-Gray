@@ -1,0 +1,113 @@
+.navbar {
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-sm);
+  padding-bottom: var(--space-sm);
+}
+
+.navbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.navbar__brand-icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* ---- Desktop nav ---- */
+
+.navbar__nav ul {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.navbar__link {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-text);
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar__link:hover,
+.navbar__link:focus-visible {
+  color: var(--color-accent);
+}
+
+.navbar__link.is-active {
+  border-bottom-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Hamburger button hidden on desktop */
+.navbar__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: none;
+  border: 1px solid var(--color-text);
+  border-radius: var(--radius);
+  cursor: pointer;
+  padding: 0;
+}
+
+.navbar__toggle-bar {
+  display: block;
+  width: 1.1rem;
+  height: 2px;
+  margin: 0 auto;
+  background-color: var(--color-text);
+}
+
+/* ---- Mobile ---- */
+
+@media (max-width: 640px) {
+  .navbar__toggle {
+    display: flex;
+  }
+
+  .navbar__nav {
+    display: none;
+    width: 100%;
+    /* Nav sits below the brand/toggle row when opened */
+    order: 3;
+  }
+
+  .navbar__nav.is-open {
+    display: block;
+    padding-top: var(--space-sm);
+  }
+
+  .navbar__nav ul {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .navbar__inner {
+    flex-wrap: wrap;
+  }
+}

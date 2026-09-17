@@ -1,0 +1,71 @@
+.show-list {
+  margin-top: var(--space-lg);
+}
+
+.show-list__heading {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.show-list__empty {
+  color: var(--color-text-soft);
+}
+
+.show-list__items {
+  display: flex;
+  flex-direction: column;
+}
+
+.show-row {
+  display: grid;
+  grid-template-columns: 8rem 1fr auto;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.show-row__date {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-accent);
+}
+
+.show-row__details {
+  display: flex;
+  flex-direction: column;
+}
+
+.show-row__venue {
+  font-weight: 600;
+}
+
+.show-row__support {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-soft);
+}
+
+.show-row__tba {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-soft);
+}
+
+/* Past shows: same layout, muted so the eye is drawn to Upcoming first */
+.show-list__items.is-past .show-row {
+  opacity: 0.6;
+}
+
+.show-list__items.is-past .show-row__date {
+  color: var(--color-text-soft);
+}
+
+@media (max-width: 560px) {
+  .show-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+}

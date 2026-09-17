@@ -1,0 +1,299 @@
+/*
+ * global.css
+ * ----------
+ * Site-wide styles: CSS reset, design tokens (colors/fonts/spacing as CSS
+ * custom properties), and base element styles.
+ *
+ * This file is imported once, in `src/main.jsx`, so its rules apply to the
+ * whole app. Individual components/pages each get their own small CSS file
+ * (e.g. `Navbar.css`, `Home.css`) for styles specific to that piece —
+ * that keeps things easy to find as the site grows.
+ *
+ * DESIGN TOKENS
+ * -------------
+ * The colors, fonts, and spacing values below are defined once as CSS
+ * variables (custom properties) on `:root`, then reused everywhere via
+ * `var(--token-name)`. If you want to reskin the whole site — change the
+ * color palette, swap fonts, etc — this is the one place to do it.
+ */
+
+:root {
+  /* ---- Color palette -----------------------------------------------
+     A dark, atmospheric "night sky" palette based on the band's cover
+     art: deep teal-navy night, a warm crescent-moon gold for accents,
+     and cool off-white "moonlight" text. Swap these hex values for your
+     own band's colors — everything below is built from just these
+     tokens, so changing them here reskins the whole site.
+  ------------------------------------------------------------------- */
+  --color-bg: #0b1e26; /* deep night-sky teal, main background */
+  --color-bg-alt: #122c36; /* slightly lighter panels/cards */
+  --color-text: #edf3f1; /* moonlit off-white, primary text */
+  --color-text-soft: #93aab0; /* muted cool gray-teal, secondary text */
+  --color-border: #24444f; /* borders, dividers, dashed placeholder edges */
+  --color-accent: #e7c873; /* crescent-moon gold — links, buttons, highlights */
+  --color-accent-dark: #c9aa54; /* hover/active state of accent */
+  --color-accent-2: #4a7a86; /* muted teal — secondary accent */
+  --color-danger: #d9705f; /* warm coral-red, reused for "sold out" etc */
+
+  /* ---- Typography ---------------------------------------------------
+     Two fonts, loaded in index.html via Google Fonts:
+       --font-display: geometric sans for headings, used tracked-out and
+                        uppercase (see h1 below) like a band wordmark/logo
+       --font-mono:    monospace, used for nav/labels/dates (a little
+                        DIY/utilitarian contrast against the display font)
+     Body copy uses the mono font at a comfortable size.
+  ------------------------------------------------------------------- */
+  --font-display: 'Montserrat', 'Century Gothic', 'Futura', sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+
+  /* ---- Spacing scale --------------------------------------------------
+     A small set of consistent spacing values instead of arbitrary pixel
+     numbers scattered everywhere.
+  ------------------------------------------------------------------- */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  /* ---- Layout ---------------------------------------------------- */
+  --content-width: 72rem; /* max width of page content */
+  --radius: 2px; /* almost-sharp corners fit the flyer aesthetic */
+}
+
+/* ---- Reset -------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Smooth scrolling for in-page anchor links (e.g. "Skip to content") */
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.6;
+
+  /* A soft glow (like moonlight against the night sky) plus a subtle
+     vignette — no image file needed, just layered gradients. */
+  background-image:
+    radial-gradient(ellipse 60% 40% at 30% 0%, rgba(231, 200, 115, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 100% 100%, rgba(0, 0, 0, 0.35) 0%, transparent 70%);
+  background-attachment: fixed;
+}
+
+/* Fine grain texture over the whole page, matching the film-grain look
+   of the reference cover art. This is a generated noise pattern (an SVG
+   feTurbulence filter encoded directly in the CSS, no image asset), laid
+   over everything at very low opacity with `mix-blend-mode: overlay` so
+   it tints rather than obscures, and `pointer-events: none` so it never
+   blocks clicks. Delete this rule if you'd rather have a flat, grain-free
+   background. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-accent-dark);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 var(--space-sm);
+  letter-spacing: 0.01em;
+}
+
+/* Page/section titles get the tracked-out, all-caps "wordmark" treatment
+   seen in the band's logo/cover art — lighter weight, wide letter
+   spacing. Applies to every <h1> (Home's band name, "Shows", "Music",
+   etc) so that voice stays consistent site-wide. */
+h1 {
+  font-size: clamp(2.25rem, 5.5vw, 4rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+p {
+  margin: 0 0 var(--space-sm);
+  max-width: 65ch; /* keep body text readable — not full page width */
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ---- Shared layout helpers ----------------------------------------
+   Small reusable utility classes used across multiple pages, so we don't
+   repeat the same rules in every page's CSS file.
+------------------------------------------------------------------- */
+
+/* Centers content and caps its width — used to wrap the contents of
+   every page/section so lines don't stretch edge-to-edge on wide
+   screens. */
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* Vertical rhythm between stacked page sections */
+.section {
+  padding: var(--space-xl) 0;
+}
+
+/* Small uppercase mono label, used above headings ("UPCOMING SHOWS" etc) */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
+}
+
+/* Button-styled link/button shared by CTAs across the site (hero,
+   ticket links, buy buttons, form submit, etc). */
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-bg);
+  background-color: var(--color-text);
+  border: 1px solid var(--color-text);
+  border-radius: var(--radius);
+  padding: 0.75em 1.5em;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+  transform: translateY(-1px);
+}
+
+/* e.g. a form's submit button while its request is in flight —
+   `<button className="btn" disabled>` */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn:disabled:hover {
+  background-color: var(--color-text);
+  border-color: var(--color-text);
+}
+
+/* Secondary/outline variant: `<a className="btn btn--outline">` */
+.btn--outline {
+  background-color: transparent;
+  color: var(--color-text);
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  background-color: var(--color-text);
+  border-color: var(--color-text);
+  color: var(--color-bg);
+}
+
+/* Smaller button variant, e.g. `<a className="btn btn--outline btn--small">` */
+.btn--small {
+  padding: 0.5em 1em;
+  font-size: 0.75rem;
+}
+
+/* Small status label, e.g. "Sold Out" on a show or merch item.
+   Modifiers: .badge--sold-out (used as-is; add more as needed, like
+   .badge--new for a fresh release). */
+.badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.35em 0.7em;
+  border-radius: var(--radius);
+}
+
+.badge--sold-out {
+  color: var(--color-bg);
+  background-color: var(--color-danger);
+}
+
+/* "Skip to content" link for keyboard/screen-reader users — hidden until
+   focused, see Navbar.jsx */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  background: var(--color-text);
+  color: var(--color-bg);
+  padding: var(--space-xs) var(--space-sm);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: var(--space-sm);
+  top: var(--space-sm);
+}

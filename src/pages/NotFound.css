@@ -1,0 +1,9 @@
+.not-found {
+  text-align: center;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+.not-found .btn {
+  margin-top: var(--space-sm);
+}
