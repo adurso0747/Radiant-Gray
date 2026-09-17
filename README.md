@@ -85,6 +85,8 @@ src/
     formatDate.js    — shared date-formatting helpers
     slugify.js        — turns text into a URL-safe id, used to
                         auto-generate each content item's React `key`
+    youtube.js        — pulls a video ID out of a normal YouTube URL,
+                        for the Home page's embedded video
 ```
 
 Every `.jsx` file has comments at the top explaining what it does — the
@@ -289,6 +291,24 @@ platform each link goes to. They render in a single color matching the
 site's theme rather than each brand's official multicolor style — see
 the comment at the top of that file if you'd rather add more platforms
 or swap in a different icon set.
+
+These same social icons also get a more prominent placement on the Home
+page, in a dedicated "Follow Along" section (in addition to the Footer,
+which is on every page) — paired with an optional embedded YouTube
+video.
+
+## Latest video (Home page)
+
+Set `home.latestVideoUrl` in `src/content/site.json` (or the admin
+panel's Site Settings → Home Page → "Latest Video URL") to a normal
+YouTube video link — anything you'd copy from the address bar, like
+`youtube.com/watch?v=...` or `youtu.be/...` — and it shows up as an
+embedded player on the Home page, right above the "Follow Along"
+section. `src/utils/youtube.js` pulls the actual video ID out of
+whatever URL shape you paste in.
+
+Leave it blank and that part of the section just doesn't render — the
+"Follow Along" social links still show on their own either way.
 
 ## The contact form
 

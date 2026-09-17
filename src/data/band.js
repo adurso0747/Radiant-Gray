@@ -20,7 +20,10 @@
  *                 <SocialLinks /> (footer, Contact page). Leave a value
  *                 blank to hide that platform's link without breaking
  *                 anything that reads this object.
- *   home        - the Home page hero photo + its alt text
+ *   home        - the Home page hero photo + its alt text, plus an
+ *                 optional latest-video link (a normal YouTube URL —
+ *                 see src/utils/youtube.js) shown as an embed on Home.
+ *                 Leave latestVideoUrl blank to hide that section.
  *   bio         - the Bio page's band portrait photo + alt text, plus
  *                 the bio story paragraphs (as a list — one entry per
  *                 paragraph)

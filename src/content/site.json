@@ -14,7 +14,9 @@
   },
   "home": {
     "heroImage": "/images/hero.jpg",
-    "heroImageAlt": "Radiant Gray sitting together in a field at dusk"
+    "heroImageAlt": "Radiant Gray sitting together in a field at dusk",
+    "latestVideoUrl": "https://www.youtube.com/watch?v=jxwZ6nKEpeU",
+    "latestVideoTitle": "My Fatal Flaw Music Video"
   },
   "bio": {
     "portraitImage": "/images/bio-portrait.jpg",

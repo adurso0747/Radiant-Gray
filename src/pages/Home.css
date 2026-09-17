@@ -93,3 +93,80 @@
   font-size: 0.8rem;
   color: var(--color-text-soft);
 }
+
+/* ---- Latest video + follow ----
+   Two layouts, switched by the `.has-video` modifier (added in
+   Home.jsx only when `home.latestVideoUrl` is actually set):
+
+   - No video: a single centered column — just the "Follow Along"
+     pills, same as before there was a video section at all.
+   - With video: a two-column row — video on one side, a vertical
+     stack of social pills on the other. Both columns are top-aligned
+     (no vertical centering on either side) so their "LATEST VIDEO" /
+     "FOLLOW ALONG" headers land on the same line.
+
+   The `.has-video` grid intentionally uses the exact same
+   `grid-template-columns`/`gap` as `.teasers__grid` above (and shares
+   the same `.container` width) — that's what makes the video and
+   "Follow Along" line up edge-to-edge with the Next Show/Latest
+   Release cards above them, column for column, instead of just
+   visually resembling them. If you change one, change the other to
+   match. */
+
+.home-follow__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xl);
+  text-align: center;
+}
+
+.home-follow__inner.has-video {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-lg);
+  align-items: start;
+  text-align: left;
+}
+
+.home-follow__video {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Only constrain the video's width when it's on its own (no socials
+   column to share the row with) — in the two-column layout it should
+   just fill its grid column instead (which is what actually resizes
+   it down to match the teaser cards' width). */
+.home-follow__inner:not(.has-video) .home-follow__video {
+  max-width: 42rem;
+  align-items: center;
+}
+
+.home-follow__video-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  overflow: hidden; /* clips the iframe to the rounded corners */
+}
+
+.home-follow__video-frame iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+
+.home-follow__socials {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.has-video .home-follow__socials {
+  align-items: stretch;
+}

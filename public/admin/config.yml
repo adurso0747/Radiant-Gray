@@ -196,6 +196,20 @@ collections:
             fields:
               - { name: heroImage, label: "Hero Photo", widget: image }
               - { name: heroImageAlt, label: "Hero Photo Description (for screen readers)", widget: string }
+              - {
+                  name: latestVideoUrl,
+                  label: "Latest Video URL",
+                  widget: string,
+                  required: false,
+                  hint: "Paste a normal YouTube video link (youtube.com/watch?v=... or youtu.be/...). Leave blank to hide the video section on the Home page.",
+                }
+              - {
+                  name: latestVideoTitle,
+                  label: "Video Title (for screen readers)",
+                  widget: string,
+                  required: false,
+                  hint: "e.g. \"Radiant Gray — My Fatal Flaw (Official Video)\"",
+                }
           - name: bio
             label: "Bio Page"
             widget: object

@@ -3,22 +3,25 @@ import { band, home } from '../data/band';
 import { shows } from '../data/shows';
 import { releases } from '../data/releases';
 import { formatShowDate, isUpcoming } from '../utils/formatDate';
+import { getYouTubeVideoId } from '../utils/youtube';
 import PinMark from '../components/icons/PinMark';
+import SocialLinks from '../components/SocialLinks';
 import { usePageTitle } from '../hooks/usePageTitle';
 import './Home.css';
 
 /**
  * Home
  * ----
- * Landing page: hero banner, then two teaser cards (next show, latest
- * release) giving a quick overview of the rest of the site. Social
- * links live in the Footer (rendered on every page from App.jsx), so
- * they're not repeated here.
+ * Landing page: hero banner, two teaser cards (next show, latest
+ * release), then a "latest video + follow us" section. Social links
+ * also live in the Footer (rendered on every page from App.jsx) — this
+ * page's copy is a more prominent, higher-visibility placement, not a
+ * replacement for that one.
  *
- * Each card's button goes straight to that specific show/release (the
- * ticket link, the streaming link) rather than to the Shows/Music pages
- * — the hero buttons above already cover "see everything", so these
- * stay useful instead of just repeating that.
+ * Each teaser card's button goes straight to that specific show/release
+ * (the ticket link, the streaming link) rather than to the Shows/Music
+ * pages — the hero buttons above already cover "see everything", so
+ * these stay useful instead of just repeating that.
  *
  * The hero photo/tagline and the teasers all pull from `src/data/band.js`,
  * `src/data/shows.js`, and `src/data/releases.js` — edit those (or their
@@ -28,6 +31,13 @@ import './Home.css';
  */
 function Home() {
   usePageTitle('Home');
+
+  // `home.latestVideoUrl` is just whatever URL you'd copy from a
+  // YouTube video's address bar — this pulls the actual video ID out of
+  // it for the embed below. Returns `null` (and the video section just
+  // doesn't render) if the field is empty or isn't a recognizable
+  // YouTube URL.
+  const latestVideoId = getYouTubeVideoId(home.latestVideoUrl);
 
   // Find the soonest show that hasn't happened yet. `[...shows]` copies
   // the array before `.sort()`, since `.sort()` mutates in place and we
@@ -156,6 +166,41 @@ function Home() {
                 </Link>
               )}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---- Latest video + follow -------------------------------------
+          The video only renders once `home.latestVideoUrl` is set to a
+          real YouTube link (see the admin panel's Site Settings, or
+          src/content/site.json) — until then this section is just the
+          "follow along" half, so socials still get this prominent
+          placement even before a video's been added. */}
+      <section className="section home-follow">
+        {/* The `has-video` modifier switches this from a single centered
+            column (video-less fallback) to a two-column layout — video
+            on one side, a vertical list of social links on the other,
+            sized to fill the same height instead of just sitting below
+            it. See Home.css. */}
+        <div className={`container home-follow__inner ${latestVideoId ? 'has-video' : ''}`.trim()}>
+          {latestVideoId && (
+            <div className="home-follow__video">
+              <span className="eyebrow">Latest Video</span>
+              <div className="home-follow__video-frame">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${latestVideoId}`}
+                  title={home.latestVideoTitle || `${band.name} — latest video`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          )}
+
+          <div className="home-follow__socials">
+            <span className="eyebrow">Follow Along</span>
+            <SocialLinks showLabels className={latestVideoId ? 'social-links--vertical' : ''} />
           </div>
         </div>
       </section>

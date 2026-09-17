@@ -28,3 +28,77 @@
   background-color: var(--color-accent);
   border-color: var(--color-accent);
 }
+
+/* ---- Labeled variant (showLabels={true}) ----
+   Wider pill buttons with the platform name spelled out, instead of
+   just an icon — visually distinct from the compact footer badges
+   above, for a spot where the socials deserve more presence (the Home
+   page's "Follow Along" section). Sized closer to the site's regular
+   `.btn` buttons than the small footer badges, so they read as a
+   deliberate, substantial set of links rather than an afterthought. */
+
+.social-links--labeled {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+/* Stacks the pills into a single column instead of a wrapped row, each
+   one full-width — used on the Home page when there's a video next to
+   this list. Combine with `showLabels` (this only makes sense for the
+   labeled pills, not the small icon badges). */
+.social-links--vertical {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: var(--space-sm);
+}
+
+.social-links--vertical .social-links__pill {
+  width: 100%;
+  /* Taller than the base pill below — four of these plus the gaps
+     between them are sized to land close to the height of the 16:9
+     video frame they sit next to on the Home page (see the
+     `.home-follow__inner.has-video` grid in Home.css), now that both
+     columns are the same width. */
+  padding: 1.2em 1.4em;
+}
+
+.social-links__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75em;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.9em 1.4em;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+/* The icon next to the label — sized relative to the pill's own
+   font-size, same trick as the badge above. */
+.social-links__pill svg {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+/* Same hover lift as the site's regular `.btn` (see global.css) — keeps
+   the interaction feel consistent wherever a clickable pill/button
+   shows up. */
+.social-links__pill:hover,
+.social-links__pill:focus-visible {
+  color: var(--color-bg);
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
