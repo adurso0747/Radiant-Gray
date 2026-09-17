@@ -184,9 +184,16 @@ button {
   padding: 0 var(--space-md);
 }
 
-/* Vertical rhythm between stacked page sections */
+/* Vertical rhythm between stacked page sections. Only sets top/bottom
+   (not the `padding` shorthand, which would also set left/right: 0) —
+   most pages put `.section` and `.container` on the same element
+   (`className="container section ..."`), and since both classes have
+   equal specificity, whichever was defined later in this file would
+   otherwise win outright and silently erase .container's horizontal
+   padding — which is exactly what was happening here before. */
 .section {
-  padding: var(--space-xl) 0;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
 }
 
 /* Small uppercase mono label, used above headings ("UPCOMING SHOWS" etc) */
