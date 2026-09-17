@@ -1,0 +1,13 @@
+# Netlify/Cloudflare Pages headers file — https://docs.netlify.com/routing/headers/
+#
+# A few baseline security headers, applied to every page. Deliberately
+# conservative — no Content-Security-Policy here, since getting one
+# right without breaking the admin panel (which loads scripts from
+# identity.netlify.com and unpkg.com) or Google Fonts takes careful,
+# live testing against the real deployed site; these three are safe,
+# widely-recommended, and don't restrict anything the site actually
+# does.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin

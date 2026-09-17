@@ -39,7 +39,9 @@ public/
     config.yml      — defines what the admin panel can edit, and how
   _redirects        — makes client-side routing (React Router) work on
                       Netlify/Cloudflare Pages — see "Deployment" below
-index.html          — the single HTML page; loads fonts and src/main.jsx
+  _headers          — a few baseline security headers, same hosts as above
+index.html          — the single HTML page; loads fonts, src/main.jsx,
+                      and a small Netlify Identity redirect snippet
 vite.config.js      — build config; also makes /admin work in local dev
 src/
   main.jsx          — entry point, mounts <App /> into index.html
@@ -143,26 +145,37 @@ which automatically triggers a rebuild and redeploy of the live site.
 
 ### One-time setup (requires deploying on Netlify)
 
-Decap CMS needs somewhere to handle login. The simplest option — no
-extra accounts, no server to run — is Netlify's **Identity** +
-**Git Gateway** features, which only work if this site is hosted on
-Netlify (see "Deployment" below for connecting the repo to Netlify in
-the first place):
+Decap CMS needs somewhere to handle login. This site is set up for
+Netlify's **Identity** + **Git Gateway** features — no extra accounts,
+no server to run — which only work if it's hosted on Netlify (see
+"Deployment" below for connecting the repo to Netlify in the first
+place):
 
 1. In your Netlify site's dashboard: **Site configuration → Identity →
    Enable Identity**.
-2. Under Identity's **Registration** setting, choose **Invite only**
-   (so random people can't sign themselves up to edit your site).
+2. Under Identity's **Registration** setting, choose **Invite only**.
+   **This step is not optional** — leaving it on the default "Open"
+   means literally anyone who finds `/admin` can create their own
+   account and get full edit access to your site's content (and commit
+   access to the GitHub repo). Double check this is actually set to
+   Invite only, since it's easy to enable Identity and forget it.
 3. Under **Services → Git Gateway**, click **Enable Git Gateway**. This
    is what lets Identity users commit to the repo without needing their
-   own GitHub account/token.
+   own GitHub account/token. **Note:** Netlify has deprecated Git
+   Gateway — it still works for sites that already have it enabled, but
+   Netlify "does not recommend" setting it up fresh, and there's no
+   guarantee it stays available long-term. If the "Enable Git Gateway"
+   button doesn't work or has disappeared, see the fallback options
+   below.
 4. Back in **Identity**, click **Invite users** and invite yourself
-   (and anyone else in the band who should be able to post updates).
-   You'll get an email with a link to confirm/set a password — clicking
-   it opens your site and (via a small redirect snippet in `index.html`)
-   forwards you straight to `/admin/`, where it actually completes.
-5. Go to `https://your-site.netlify.app/admin`, click **Login with
-   Netlify Identity**, and sign in.
+   (and anyone else in the band who should be able to post updates —
+   check the Identity user list occasionally and remove anyone who
+   shouldn't be there anymore). You'll get an email with a link to
+   confirm/set a password — clicking it opens your site and (via a
+   small redirect snippet in `index.html`) forwards you straight to
+   `/admin/`, where it actually completes.
+5. Go to `https://your-site.com/admin`, click **Login with Netlify
+   Identity**, and sign in.
 
 That's it — from then on, `/admin` is your content editor.
 
@@ -176,10 +189,23 @@ visitor. If you ever see "email not confirmed" despite clicking the
 link, that redirect is what makes it actually work — it's already
 handled, but worth knowing if you're debugging.)
 
+**If Git Gateway won't enable, or ever stops working:** two realistic
+replacements, both requiring reconfiguring `public/admin/config.yml`'s
+`backend` section (not just a dashboard setting):
+- [**DecapBridge**](https://decapbridge.com/) — a hosted auth service
+  built specifically for Decap CMS, no GitHub account needed for band
+  members to log in. It's a third-party service, though, and setup
+  involves giving it a GitHub access token with write access to this
+  repo, so it's a trust call.
+- **A GitHub OAuth app + a small proxy** (Decap's own `github` backend)
+  — no third-party service, but each person logging in needs their own
+  real GitHub account, and it needs a small proxy (commonly a tiny
+  Cloudflare Worker) since GitHub's OAuth flow needs a server-side
+  secret somewhere.
+
 (If you deploy somewhere other than Netlify instead — Vercel, GitHub
-Pages, etc — Decap CMS still works, but auth takes a bit more setup: a
-GitHub OAuth app plus a small proxy service. Netlify's own docs cover
-this under "External OAuth clients" if you go that route.)
+Pages, etc — Decap CMS still works, but needs one of the two options
+just above instead of Identity/Git Gateway.)
 
 ### Using it day to day
 
@@ -325,6 +351,25 @@ already there — just uncomment and fill it in) before building, and add
 a client-side-routing workaround (search "Vite React GitHub Pages SPA
 routing" for current instructions, since this varies with GitHub Pages
 config changes over time).
+
+### Custom domain
+
+The live site is currently at `radiantgrayband.com`, set up through
+Netlify's **Domain management**. Broad strokes for pointing a domain
+you own at a Netlify site:
+
+1. **Site configuration → Domain management → Add a domain**, enter it.
+2. Point DNS at Netlify — either hand Netlify the DNS entirely (change
+   the domain's nameservers, at wherever it was registered, to
+   Netlify's — simplest, Netlify manages everything from there), or
+   keep DNS where it is and just add the specific records Netlify shows
+   you (typically an ALIAS/A record for the bare domain, a CNAME for
+   `www`).
+3. Netlify auto-issues a free HTTPS certificate (Let's Encrypt) once it
+   verifies the DNS — usually within minutes, sometimes up to a day.
+
+The `something-random.netlify.app` address still works afterward too;
+it just quietly redirects to the real domain.
 
 ## Tech stack
 

@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Environment variables — none in use yet, but keep any out of git if
+# they're ever added (e.g. an API key for a future integration)
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
