@@ -158,11 +158,23 @@ the first place):
    own GitHub account/token.
 4. Back in **Identity**, click **Invite users** and invite yourself
    (and anyone else in the band who should be able to post updates).
-   You'll get an email with a link to set a password.
+   You'll get an email with a link to confirm/set a password — clicking
+   it opens your site and (via a small redirect snippet in `index.html`)
+   forwards you straight to `/admin/`, where it actually completes.
 5. Go to `https://your-site.netlify.app/admin`, click **Login with
    Netlify Identity**, and sign in.
 
 That's it — from then on, `/admin` is your content editor.
+
+(Netlify's invite/confirmation emails link to your site's root URL, not
+`/admin/`, but the actual confirming only happens where the Identity
+widget runs — which is deliberately only loaded on `/admin/`, not the
+rest of the site. `index.html` has a small script that detects that
+kind of link and forwards it to `/admin/` with the token intact, so
+this works without loading Identity's widget for every regular
+visitor. If you ever see "email not confirmed" despite clicking the
+link, that redirect is what makes it actually work — it's already
+handled, but worth knowing if you're debugging.)
 
 (If you deploy somewhere other than Netlify instead — Vercel, GitHub
 Pages, etc — Decap CMS still works, but auth takes a bit more setup: a

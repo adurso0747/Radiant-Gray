@@ -31,6 +31,27 @@
     <title>Radiant Gray</title>
   </head>
   <body>
+    <!--
+      Netlify Identity invite/confirmation/password-recovery emails
+      always link back to the site's root URL (here) with a token in
+      the URL hash, e.g. "/#invite_token=abc123" — never straight to
+      /admin/, where the Netlify Identity widget actually lives and can
+      process it (see public/admin/index.html). Land here with one of
+      those tokens and this sends you on to /admin/ with the token
+      still attached, so the widget there can pick it up and show the
+      "set your password" step.
+
+      Deliberately NOT loading the full Netlify Identity widget script
+      here on the main site — only visitors who followed one of those
+      emails ever hit this, and it's a plain, tiny check either way, so
+      regular visitors never pay for it.
+    -->
+    <script>
+      if (/^#(confirmation_token|invite_token|recovery_token|email_change_token)=/.test(window.location.hash)) {
+        window.location.replace('/admin/' + window.location.hash);
+      }
+    </script>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
