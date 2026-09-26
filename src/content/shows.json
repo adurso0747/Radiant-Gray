@@ -5,7 +5,7 @@
       "venue": "Century Bar",
       "city": "Philadelphia",
       "state": "PA",
-      "ticketUrl": "https://example.com/tickets",
+      "ticketUrl": null,
       "infoUrl": null,
       "soldOut": false,
       "supportedBy": [
@@ -18,7 +18,7 @@
       "venue": "Water Tower Live Music and Bar",
       "city": "Philadelphia",
       "state": "PA",
-      "ticketUrl": "https://example.com/tickets",
+      "ticketUrl": null,
       "infoUrl": null,
       "soldOut": false,
       "supportedBy": [
@@ -32,7 +32,7 @@
       "venue": "Little Big Planet",
       "city": "Philadelphia",
       "state": "PA",
-      "ticketUrl": "https://example.com/tickets",
+      "ticketUrl": null,
       "infoUrl": null,
       "soldOut": false,
       "supportedBy": [

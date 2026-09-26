@@ -1,9 +1,43 @@
 # Radiant Gray
 
-The official website for Radiant Gray — built with [React](https://react.dev/)
-and [Vite](https://vite.dev/). This README covers how to run the site
-locally, how the project is organized, how to edit content (by hand, or
-through the built-in admin panel), and how to deploy it.
+The official website for Radiant Gray, a Philadelphia emo/shoegaze band —
+live at **[radiantgrayband.com](https://radiantgrayband.com)**. Built with
+[React](https://react.dev/) and [Vite](https://vite.dev/), deployed on
+Netlify.
+
+## Overview
+
+![Radiant Gray home page](docs/screenshot.png)
+
+A fully static, mobile-friendly band site (Home, Bio, Shows, Music, Merch,
+Contact) that the band can keep up to date themselves — no code changes
+needed to post a show, add a release, or swap a photo.
+
+**Highlights**
+- **Git-based admin panel** at `/admin` ([Decap CMS](https://decapcms.org/)
+  with Netlify Identity): invite-only logins, edits commit straight to this
+  repo and trigger a redeploy. No database or backend to maintain.
+- **Content as JSON** (`src/content/`) behind a thin data layer
+  (`src/data/`), so pages never care whether content came from the CMS or a
+  hand edit.
+- **Working contact form** via Netlify Forms, including the hidden-form
+  workaround React apps need for Netlify to detect it, plus a honeypot for
+  spam.
+- **Shows page** that sorts itself into Upcoming/Past by date, with a
+  sold-out → tickets → event info → "coming soon" fallback for each show.
+- **Latest-video embed** on Home from a pasted YouTube URL (privacy-friendly
+  `youtube-nocookie` player, no API key).
+- **Responsive, accessible UI**: custom dark "night sky" theme built from
+  CSS variables, skip link, semantic landmarks, alt text on every image.
+- **Security basics**: no secrets in the repo, security headers via
+  `_headers`, `rel="noreferrer noopener"` on all external links.
+
+**Stack:** React 19, Vite, React Router, plain CSS (custom properties),
+Decap CMS, Netlify (hosting, Forms, Identity).
+
+The rest of this README covers how to run the site locally, how the project
+is organized, how to edit content (by hand, or through the admin panel), and
+how to deploy it.
 
 ## Getting started
 
