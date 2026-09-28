@@ -4,10 +4,15 @@ import { band } from '../data/band';
 import MoonMark from './icons/MoonMark';
 import './Navbar.css';
 
+interface NavLinkItem {
+  to: string;
+  label: string;
+}
+
 // Every page link shown in the nav. Add/remove/reorder entries here to
 // change the site's main navigation — the rest of the component just
 // renders whatever is in this list.
-const navLinks = [
+const navLinks: NavLinkItem[] = [
   { to: '/', label: 'Home' },
   { to: '/bio', label: 'Bio' },
   { to: '/shows', label: 'Shows' },

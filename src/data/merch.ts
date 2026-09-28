@@ -1,11 +1,11 @@
 /**
- * merch.js
+ * merch.ts
  * --------
  * Merch items — NOT currently rendered anywhere. The Merch page
- * (`src/pages/Merch.jsx`) is a simple "coming soon" placeholder for now
+ * (`src/pages/Merch.tsx`) is a simple "coming soon" placeholder for now
  * since there's no real merch to sell yet. This file (and the admin
  * panel's "Merch" section) is left here, ready to go, for whenever that
- * changes — see the comment at the top of Merch.jsx for how to wire it
+ * changes — see the comment at the top of Merch.tsx for how to wire it
  * back in.
  *
  * The actual data lives in `src/content/merch.json` — that's the file
@@ -33,11 +33,14 @@
  */
 import data from '../content/merch.json';
 import { slugify } from '../utils/slugify';
+import type { RawMerchItem, MerchItem } from '../types/content';
 
-export const merchItems = data.merchItems.map((item) => ({
-  ...item,
-  // Auto-generated from the name, e.g. 'porchlight-tour-tee' — just
-  // needs to be unique per item, used internally by React to tell list
-  // items apart. Nobody has to type this in the admin panel.
-  id: slugify(item.name),
-}));
+export const merchItems: MerchItem[] = data.merchItems.map(
+  (item: RawMerchItem): MerchItem => ({
+    ...item,
+    // Auto-generated from the name, e.g. 'porchlight-tour-tee' — just
+    // needs to be unique per item, used internally by React to tell
+    // list items apart. Nobody has to type this in the admin panel.
+    id: slugify(item.name),
+  }),
+);

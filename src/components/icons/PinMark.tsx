@@ -1,12 +1,17 @@
+interface PinMarkProps {
+  size?: number;
+  className?: string;
+}
+
 /**
  * PinMark
  * -------
  * A small map-pin glyph, used next to the band's location on the Home
- * page hero. Plain inline SVG (see MoonMark.jsx for the same pattern) —
+ * page hero. Plain inline SVG (see MoonMark.tsx for the same pattern) —
  * uses `currentColor`, so it inherits whatever CSS `color` is set on it
  * or an ancestor.
  */
-function PinMark({ size = 16, className = '' }) {
+function PinMark({ size = 16, className = '' }: PinMarkProps) {
   return (
     <svg
       width={size}

@@ -1,5 +1,5 @@
 /**
- * youtube.js
+ * youtube.ts
  * ----------
  * Pulls a video ID out of a normal YouTube URL, so the Home page's
  * "Latest Video" field (see `home.latestVideoUrl` in
@@ -14,10 +14,10 @@
  * plus any extra query params those come with (share timestamps,
  * playlist context, etc) — those are just ignored.
  */
-export function getYouTubeVideoId(url) {
+export function getYouTubeVideoId(url: string | null): string | null {
   if (!url) return null;
 
-  let parsed;
+  let parsed: URL;
   try {
     parsed = new URL(url);
   } catch {

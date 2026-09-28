@@ -1,5 +1,5 @@
 /**
- * releases.js
+ * releases.ts
  * -----------
  * Music releases (albums/EPs/singles), rendered by the Music page (and the
  * "latest release" teaser on Home).
@@ -31,11 +31,14 @@
  */
 import data from '../content/releases.json';
 import { slugify } from '../utils/slugify';
+import type { RawRelease, Release } from '../types/content';
 
-export const releases = data.releases.map((release) => ({
-  ...release,
-  // Auto-generated from the title, e.g. 'my-fatal-flaw' — just needs to
-  // be unique per release, used internally by React to tell list items
-  // apart. Nobody has to type this in the admin panel.
-  id: slugify(release.title),
-}));
+export const releases: Release[] = data.releases.map(
+  (release: RawRelease): Release => ({
+    ...release,
+    // Auto-generated from the title, e.g. 'my-fatal-flaw' — just needs
+    // to be unique per release, used internally by React to tell list
+    // items apart. Nobody has to type this in the admin panel.
+    id: slugify(release.title),
+  }),
+);

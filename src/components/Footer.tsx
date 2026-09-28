@@ -5,7 +5,7 @@ import './Footer.css';
 /**
  * Footer
  * ------
- * Site footer shown on every page (rendered once, from App.jsx).
+ * Site footer shown on every page (rendered once, from App.tsx).
  * Repeats the social links and a copyright line.
  */
 function Footer() {

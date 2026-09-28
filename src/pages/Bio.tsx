@@ -9,9 +9,9 @@ import './Bio.css';
  * Band story + member roster.
  *
  * The portrait photo, bio paragraphs, and member roster (including each
- * member's photo) all come from data — `bio` from `src/data/band.js`
+ * member's photo) all come from data — `bio` from `src/data/band.ts`
  * (backed by `src/content/site.json`) and `members` from
- * `src/data/members.js` (backed by `src/content/members.json`). Edit
+ * `src/data/members.ts` (backed by `src/content/members.json`). Edit
  * those files, or use the admin panel (see README.md → "Managing
  * content with the admin panel"), rather than editing this file.
  */

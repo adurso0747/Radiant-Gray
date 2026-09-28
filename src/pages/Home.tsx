@@ -14,7 +14,7 @@ import './Home.css';
  * ----
  * Landing page: hero banner, two teaser cards (next show, latest
  * release), then a "latest video + follow us" section. Social links
- * also live in the Footer (rendered on every page from App.jsx) — this
+ * also live in the Footer (rendered on every page from App.tsx) — this
  * page's copy is a more prominent, higher-visibility placement, not a
  * replacement for that one.
  *
@@ -23,11 +23,11 @@ import './Home.css';
  * pages — the hero buttons above already cover "see everything", so
  * these stay useful instead of just repeating that.
  *
- * The hero photo/tagline and the teasers all pull from `src/data/band.js`,
- * `src/data/shows.js`, and `src/data/releases.js` — edit those (or their
+ * The hero photo/tagline and the teasers all pull from `src/data/band.ts`,
+ * `src/data/shows.ts`, and `src/data/releases.ts` — edit those (or their
  * underlying content in `src/content/`, or use the admin panel) and this
  * page updates automatically. (There's no merch teaser since the Merch
- * page is currently a "coming soon" placeholder — see src/pages/Merch.jsx.)
+ * page is currently a "coming soon" placeholder — see src/pages/Merch.tsx.)
  */
 function Home() {
   usePageTitle('Home');
@@ -47,7 +47,7 @@ function Home() {
     .sort((a, b) => a.date.localeCompare(b.date))[0];
 
   // Newest release is assumed to be first in the array (see the comment
-  // at the top of releases.js).
+  // at the top of releases.ts).
   const latestRelease = releases[0];
 
   return (

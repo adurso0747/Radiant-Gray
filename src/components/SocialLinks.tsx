@@ -1,15 +1,28 @@
 import { SiInstagram, SiTiktok, SiYoutube, SiSpotify } from 'react-icons/si';
+import type { IconType } from 'react-icons';
 import { socialLinks } from '../data/band';
+import type { SocialLinks as SocialLinksData } from '../types/content';
 import './SocialLinks.css';
+
+interface SocialLinksProps {
+  className?: string;
+  showLabels?: boolean;
+}
+
+interface Platform {
+  key: keyof SocialLinksData;
+  Icon: IconType;
+  name: string;
+}
 
 /**
  * SocialLinks
  * -----------
  * Renders links out to Instagram / TikTok / YouTube / Spotify, reading
- * URLs from `src/data/band.js`. Update the URLs there — this component
+ * URLs from `src/data/band.ts`. Update the URLs there — this component
  * doesn't need to change.
  *
- * If a platform's URL is set to `null` in band.js, its link is skipped
+ * If a platform's URL is set to `null` in band.ts, its link is skipped
  * entirely (so you can hide a platform you don't use yet without editing
  * this file).
  *
@@ -30,11 +43,11 @@ import './SocialLinks.css';
  *     Along" section, so it reads as its own deliberate thing rather
  *     than just a repeat of the footer.
  */
-function SocialLinks({ className = '', showLabels = false }) {
+function SocialLinks({ className = '', showLabels = false }: SocialLinksProps) {
   // Each entry: the key in `socialLinks`, the icon component to render,
   // and the full platform name (used as the label, and always for
   // screen readers + the tooltip even when the label isn't shown).
-  const platforms = [
+  const platforms: Platform[] = [
     { key: 'instagram', Icon: SiInstagram, name: 'Instagram' },
     { key: 'tiktok', Icon: SiTiktok, name: 'TikTok' },
     { key: 'youtube', Icon: SiYoutube, name: 'YouTube' },

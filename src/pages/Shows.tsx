@@ -1,12 +1,13 @@
 import { shows } from '../data/shows';
 import { formatShowDate, isUpcoming } from '../utils/formatDate';
 import { usePageTitle } from '../hooks/usePageTitle';
+import type { Show } from '../types/content';
 import './Shows.css';
 
 /**
  * Shows
  * -----
- * Full list of shows from `src/data/shows.js`, automatically split into
+ * Full list of shows from `src/data/shows.ts`, automatically split into
  * "Upcoming" (sorted soonest-first) and "Past" (sorted most-recent-first)
  * sections based on today's date — you don't need to move entries
  * between lists yourself as dates pass.
@@ -37,6 +38,13 @@ function Shows() {
   );
 }
 
+interface ShowListProps {
+  title: string;
+  showsList: Show[];
+  emptyMessage?: string;
+  pastStyle?: boolean;
+}
+
 /**
  * ShowList
  * --------
@@ -44,7 +52,7 @@ function Shows() {
  * its own small component since Upcoming and Past need the exact same
  * markup, just with different data and a "past" styling flag.
  */
-function ShowList({ title, showsList, emptyMessage, pastStyle = false }) {
+function ShowList({ title, showsList, emptyMessage, pastStyle = false }: ShowListProps) {
   return (
     <section className="show-list">
       <h2 className="show-list__heading">{title}</h2>

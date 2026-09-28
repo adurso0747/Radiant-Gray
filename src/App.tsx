@@ -20,9 +20,9 @@ import NotFound from './pages/NotFound';
  * `<BrowserRouter>` enables React Router's URL-based navigation.
  * `<Routes>` picks the one `<Route>` whose `path` matches the current
  * URL and renders its `element`. Adding a new page to the site means:
- *   1. Create `src/pages/YourPage.jsx`
+ *   1. Create `src/pages/YourPage.tsx`
  *   2. Import it above and add a `<Route path="/your-page" .../>` below
- *   3. Add a link to it in `src/components/Navbar.jsx`'s `navLinks` list
+ *   3. Add a link to it in `src/components/Navbar.tsx`'s `navLinks` list
  *
  * Note on deployment: this is "client-side routing" — the server just
  * needs to serve `index.html` for any unknown path and React Router
@@ -36,7 +36,7 @@ function App() {
       <Navbar />
 
       {/* `id="main-content"` is the target of the "Skip to content" link
-          in Navbar.jsx. `<main>` is the semantic landmark screen readers
+          in Navbar.tsx. `<main>` is the semantic landmark screen readers
           use to jump straight to page content. */}
       <main id="main-content">
         <Routes>

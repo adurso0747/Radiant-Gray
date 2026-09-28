@@ -1,3 +1,8 @@
+interface MoonMarkProps {
+  size?: number;
+  className?: string;
+}
+
 /**
  * MoonMark
  * --------
@@ -10,7 +15,7 @@
  * or an ancestor — see `.navbar__brand-icon` in Navbar.css for an
  * example of tinting it via CSS instead of a prop.
  */
-function MoonMark({ size = 20, className = '' }) {
+function MoonMark({ size = 20, className = '' }: MoonMarkProps) {
   return (
     <svg
       width={size}

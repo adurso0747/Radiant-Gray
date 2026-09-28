@@ -1,5 +1,5 @@
 /**
- * band.js
+ * band.ts
  * -------
  * Core band info, social links, and the Home/Bio page images & text —
  * used across the whole site (Navbar, Footer, Home hero, Bio page,
@@ -22,15 +22,16 @@
  *                 anything that reads this object.
  *   home        - the Home page hero photo + its alt text, plus an
  *                 optional latest-video link (a normal YouTube URL —
- *                 see src/utils/youtube.js) shown as an embed on Home.
+ *                 see src/utils/youtube.ts) shown as an embed on Home.
  *                 Leave latestVideoUrl blank to hide that section.
  *   bio         - the Bio page's band portrait photo + alt text, plus
  *                 the bio story paragraphs (as a list — one entry per
  *                 paragraph)
  */
 import site from '../content/site.json';
+import type { Band, SocialLinks, HomeContent, BioContent } from '../types/content';
 
-export const band = site.band;
-export const socialLinks = site.socialLinks;
-export const home = site.home;
-export const bio = site.bio;
+export const band: Band = site.band;
+export const socialLinks: SocialLinks = site.socialLinks;
+export const home: HomeContent = site.home;
+export const bio: BioContent = site.bio;

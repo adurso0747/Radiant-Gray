@@ -1,0 +1,29 @@
+name: CI
+
+# Runs on every push and every pull request against main — typecheck,
+# lint, test, and a production build all have to pass. This doesn't
+# deploy anything: Netlify has its own build/deploy pipeline watching
+# this same repo. This workflow exists purely so a broken commit gets
+# flagged (as a red X on the commit/PR) before it ever reaches Netlify.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build

@@ -19,7 +19,7 @@ import { useEffect } from 'react';
  * a value in its dependency array (the `[title]` below) changes — so
  * switching pages (which changes `title`) updates the tab title again.
  */
-export function usePageTitle(title) {
+export function usePageTitle(title: string): void {
   useEffect(() => {
     document.title = title ? `${title} | Radiant Gray` : 'Radiant Gray';
   }, [title]);

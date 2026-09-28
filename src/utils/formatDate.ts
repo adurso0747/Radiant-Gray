@@ -1,5 +1,5 @@
 /**
- * formatDate.js
+ * formatDate.ts
  * -------------
  * Small date helpers shared by the Home and Shows pages, so both format
  * show dates the same way and we're not repeating this logic.
@@ -13,7 +13,7 @@
  * UTC midnight, which can display as the *previous* day for anyone west
  * of UTC — a classic JS date gotcha.
  */
-export function formatShowDate(isoDate) {
+export function formatShowDate(isoDate: string): string {
   const date = new Date(`${isoDate}T00:00:00`);
   return date
     .toLocaleDateString('en-US', {
@@ -25,7 +25,7 @@ export function formatShowDate(isoDate) {
 }
 
 /** True if the given 'YYYY-MM-DD' date is today or in the future. */
-export function isUpcoming(isoDate) {
+export function isUpcoming(isoDate: string): boolean {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   return new Date(`${isoDate}T00:00:00`) >= today;

@@ -10,7 +10,9 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+coverage
 *.local
+*.tsbuildinfo
 
 # Environment variables — none in use yet, but keep any out of git if
 # they're ever added (e.g. an API key for a future integration)

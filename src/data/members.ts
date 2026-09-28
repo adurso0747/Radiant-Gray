@@ -1,5 +1,5 @@
 /**
- * members.js
+ * members.ts
  * ----------
  * Band member roster, rendered by the Bio page.
  *
@@ -17,11 +17,14 @@
  */
 import data from '../content/members.json';
 import { slugify } from '../utils/slugify';
+import type { RawMember, Member } from '../types/content';
 
-export const members = data.members.map((member) => ({
-  ...member,
-  // Auto-generated from the name, e.g. 'jared' — just needs to be
-  // unique per member, used internally by React to tell list items
-  // apart. Nobody has to type this in the admin panel.
-  id: slugify(member.name),
-}));
+export const members: Member[] = data.members.map(
+  (member: RawMember): Member => ({
+    ...member,
+    // Auto-generated from the name, e.g. 'jared' — just needs to be
+    // unique per member, used internally by React to tell list items
+    // apart. Nobody has to type this in the admin panel.
+    id: slugify(member.name),
+  }),
+);

@@ -1,5 +1,5 @@
 /**
- * shows.js
+ * shows.ts
  * --------
  * Show/tour dates, rendered by the Shows page (and the "next show" teaser
  * on Home).
@@ -42,11 +42,14 @@
  */
 import data from '../content/shows.json';
 import { slugify } from '../utils/slugify';
+import type { RawShow, Show } from '../types/content';
 
-export const shows = data.shows.map((show) => ({
-  ...show,
-  // Auto-generated from date + venue, e.g. '2026-07-26-century-bar' —
-  // just needs to be unique per show, used internally by React to tell
-  // list items apart. Nobody has to type this in the admin panel.
-  id: `${show.date}-${slugify(show.venue)}`,
-}));
+export const shows: Show[] = data.shows.map(
+  (show: RawShow): Show => ({
+    ...show,
+    // Auto-generated from date + venue, e.g. '2026-07-26-century-bar' —
+    // just needs to be unique per show, used internally by React to
+    // tell list items apart. Nobody has to type this in the admin panel.
+    id: `${show.date}-${slugify(show.venue)}`,
+  }),
+);

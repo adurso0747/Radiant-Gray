@@ -5,7 +5,7 @@ import './Music.css';
 /**
  * Music
  * -----
- * Grid of releases from `src/data/releases.js`, each with cover art
+ * Grid of releases from `src/data/releases.ts`, each with cover art
  * (each release's `coverImage` field) and links out to
  * streaming/Bandcamp — only the links that are actually set show up
  * (see `release-card__links` below), so a Bandcamp-only release doesn't

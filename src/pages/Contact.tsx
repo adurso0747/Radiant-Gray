@@ -1,7 +1,15 @@
-import { useState } from 'react';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { band } from '../data/band';
 import { usePageTitle } from '../hooks/usePageTitle';
 import './Contact.css';
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+type Status = 'idle' | 'submitting' | 'success' | 'error';
 
 /**
  * Contact
@@ -48,10 +56,10 @@ function Contact() {
   // One state object holding all three field values, rather than three
   // separate `useState` calls — keeps `handleChange` reusable for every
   // field via its `name` attribute (see the input below).
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
+  const [formData, setFormData] = useState<ContactFormData>({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState<Status>('idle');
 
-  function handleChange(event) {
+  function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
@@ -60,13 +68,13 @@ function Contact() {
   // same format a plain HTML <form> would send), not JSON — this turns
   // { name: 'value' } into 'name=value&...' with everything properly
   // escaped.
-  function encodeForNetlify(data) {
+  function encodeForNetlify(data: Record<string, string>): string {
     return Object.keys(data)
       .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
       .join('&');
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); // stop the browser's default full-page form submit
     setStatus('submitting');
 

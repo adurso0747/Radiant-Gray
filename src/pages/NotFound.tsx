@@ -5,7 +5,7 @@ import './NotFound.css';
 /**
  * NotFound
  * --------
- * Rendered for any URL that doesn't match a route in App.jsx (the
+ * Rendered for any URL that doesn't match a route in App.tsx (the
  * `path="*"` catch-all route).
  */
 function NotFound() {

@@ -1,5 +1,7 @@
 # Radiant Gray
 
+[![CI](https://github.com/adurso0747/Radiant-Gray/actions/workflows/ci.yml/badge.svg)](https://github.com/adurso0747/Radiant-Gray/actions/workflows/ci.yml)
+
 Website for Radiant Gray, a Philadelphia emo/shoegaze band:
 **[radiantgrayband.com](https://radiantgrayband.com)**
 
@@ -18,10 +20,13 @@ that the band can update without touching code.
 - Content-managed: shows, releases, members, photos and site text are edited
   through a CMS rather than in code
 - Responsive layout, custom dark theme built on CSS variables
+- Typed throughout (TypeScript, strict mode), with a Vitest + React Testing
+  Library suite and a CI workflow that runs it on every push
 
 ## Stack
 
-React 19, Vite, React Router, plain CSS, Decap CMS, Netlify
+React 19, TypeScript, Vite, React Router, plain CSS, Decap CMS, Netlify.
+Vitest + React Testing Library for tests, GitHub Actions for CI.
 
 ## Running locally
 
@@ -31,9 +36,13 @@ npm run dev      # http://localhost:5173
 ```
 
 ```bash
-npm run build    # production build into dist/
-npm run preview  # serve the production build locally
-npm run lint     # oxlint
+npm run build         # production build into dist/
+npm run preview       # serve the production build locally
+npm run lint          # oxlint
+npm run typecheck     # tsc -b, no emit
+npm run test          # vitest, single run
+npm run test:watch    # vitest, watch mode
+npm run test:coverage # vitest with a coverage report
 ```
 
 ## Structure
@@ -44,17 +53,22 @@ src/
   components/     Navbar, Footer, SocialLinks, icons
   pages/          Home, Bio, Shows, Music, Merch, Contact, NotFound
   content/        site content as JSON
-  data/           thin layer over content/ that pages import from
+  data/           thin, typed layer over content/ that pages import from
+  types/          content shape definitions (Show, Release, Member, ...)
   hooks/          usePageTitle
   utils/          date, slug and YouTube URL helpers
   styles/         global.css (design tokens and base styles)
+  test/           Vitest setup (jest-dom matchers, cleanup)
 ```
+
+Tests live next to what they test (`Shows.tsx` / `Shows.test.tsx`, etc.)
+rather than in a separate directory.
 
 ## Content
 
 All site content lives in `src/content/*.json` (`site`, `shows`, `releases`,
-`members`, `merch`). Pages read it through the modules in `src/data/`, which
-document each field.
+`members`, `merch`). Pages read it through the modules in `src/data/`, typed
+against the shapes in `src/types/content.ts`.
 
 Theme colors, fonts and spacing are CSS variables at the top of
 `src/styles/global.css`.
@@ -62,3 +76,5 @@ Theme colors, fonts and spacing are CSS variables at the top of
 ## Deployment
 
 Built with `npm run build` and published from `dist/` on Netlify.
+`.github/workflows/ci.yml` runs typecheck/lint/test/build on every push and
+PR — Netlify's own build is separate and unaffected by it either way.
