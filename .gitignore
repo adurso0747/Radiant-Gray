@@ -14,8 +14,7 @@ coverage
 *.local
 *.tsbuildinfo
 
-# Environment variables — none in use yet, but keep any out of git if
-# they're ever added (e.g. an API key for a future integration)
+# Environment variables — e.g. .env.local's VITE_CONTACT_API_URL
 .env
 .env.*
 !.env.example

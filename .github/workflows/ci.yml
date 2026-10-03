@@ -5,6 +5,10 @@ name: CI
 # deploy anything: Netlify has its own build/deploy pipeline watching
 # this same repo. This workflow exists purely so a broken commit gets
 # flagged (as a red X on the commit/PR) before it ever reaches Netlify.
+#
+# The Contact API (the backend behind the Contact page's form) lives in
+# its own repo — github.com/adurso0747/Radiant-Gray-Api — with
+# its own CI.
 on:
   push:
     branches: [main]

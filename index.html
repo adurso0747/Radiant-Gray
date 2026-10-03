@@ -54,25 +54,5 @@
 
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-
-    <!--
-      Netlify Forms setup for the Contact page (src/pages/Contact.tsx).
-      Netlify detects forms by scanning the plain HTML it deploys — but
-      this site's actual contact form only exists once React renders it
-      in the browser, which happens too late for Netlify to see it. This
-      hidden, plain-HTML copy (never shown, never used directly) is what
-      Netlify's build actually reads to register the form and its
-      fields; it must be kept in sync with the real form's `name` and
-      field `name`s by hand if you ever add/remove a field there.
-
-      No effect if you deploy somewhere other than Netlify — this markup
-      is simply inert.
-    -->
-    <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <textarea name="message"></textarea>
-      <input type="text" name="bot-field" />
-    </form>
   </body>
 </html>
