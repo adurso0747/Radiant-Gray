@@ -94,6 +94,51 @@
   color: var(--color-text-soft);
 }
 
+/* Inline "Directions" link next to the venue in the <h3>, and the time
+   (when set) as its own line below — same rules and styling as the
+   Shows page's .show-row__directions / .show-row__time (see Shows.css),
+   just renamed for this card's own BEM-ish class scheme. */
+.teaser-card__directions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin-left: var(--space-xs);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.teaser-card__directions:hover,
+.teaser-card__directions:focus-visible {
+  color: var(--color-accent);
+}
+
+.teaser-card__time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  width: fit-content;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  margin-bottom: var(--space-xs);
+}
+
+.teaser-card__time:hover,
+.teaser-card__time:focus-visible {
+  color: var(--color-accent);
+}
+
 /* ---- Latest video + follow ----
    Two layouts, switched by the `.has-video` modifier (added in
    Home.jsx only when `home.latestVideoUrl` is actually set):

@@ -4,7 +4,10 @@ import { shows } from '../data/shows';
 import { releases } from '../data/releases';
 import { formatShowDate, isUpcoming } from '../utils/formatDate';
 import { getYouTubeVideoId } from '../utils/youtube';
+import { getMapsUrl } from '../utils/maps';
+import { getCalendarUrl } from '../utils/calendar';
 import PinMark from '../components/icons/PinMark';
+import CalendarMark from '../components/icons/CalendarMark';
 import SocialLinks from '../components/SocialLinks';
 import { usePageTitle } from '../hooks/usePageTitle';
 import './Home.css';
@@ -50,6 +53,13 @@ function Home() {
   // at the top of releases.ts).
   const latestRelease = releases[0];
 
+  // Same rule as the Shows page (see Shows.tsx): an address only takes
+  // over as the primary action (a "Directions" button) when there's no
+  // ticket/info link and the show isn't sold out — otherwise it shows
+  // as a small inline link next to the venue instead.
+  const addressIsPrimaryAction =
+    !!nextShow && !nextShow.soldOut && !nextShow.ticketUrl && !nextShow.infoUrl && !!nextShow.address;
+
   return (
     <>
       {/* ---- Hero ---------------------------------------------------- */}
@@ -85,8 +95,34 @@ function Home() {
               <>
                 <h3>
                   {nextShow.venue} - {nextShow.city}, {nextShow.state}
+                  {nextShow.address && !addressIsPrimaryAction && (
+                    <a
+                      href={getMapsUrl(nextShow.address)}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="teaser-card__directions"
+                    >
+                      <PinMark size={12} />
+                      Directions
+                    </a>
+                  )}
                 </h3>
                 <p className="teaser-card__meta">{formatShowDate(nextShow.date)}</p>
+                {/* Shown whenever a time is set, independent of
+                    ticket/info/address state — same rule as the Shows
+                    page (see Shows.tsx). Links out to a Google Calendar
+                    "add event" prefilled from the show. */}
+                {nextShow.time && (
+                  <a
+                    href={getCalendarUrl(nextShow)}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="teaser-card__time"
+                  >
+                    <CalendarMark size={12} />
+                    {nextShow.time}
+                  </a>
+                )}
               </>
             ) : (
               <p className="teaser-card__meta">No shows booked yet — check back soon.</p>
@@ -115,6 +151,15 @@ function Home() {
                   className="btn btn--outline"
                 >
                   Event Info
+                </a>
+              ) : addressIsPrimaryAction ? (
+                <a
+                  href={getMapsUrl(nextShow!.address!)}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="btn btn--outline"
+                >
+                  Directions
                 </a>
               ) : nextShow ? (
                 <span className="teaser-card__tba">Event Info Coming Soon</span>
