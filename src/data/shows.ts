@@ -23,6 +23,14 @@
  *   venue       - venue name
  *   city        - city name
  *   state       - state/region abbreviation
+ *   address     - street address, e.g. '2580 Haverford Rd, Ardmore, PA
+ *                 19003' — shows a "Directions" link to Google Maps
+ *                 when set. Leave blank to skip it. Independent of
+ *                 ticketUrl/infoUrl below — a show can have both.
+ *   time        - free-form, e.g. '8:00 PM' or 'Doors 7pm, Show 8pm'.
+ *                 Shown whenever set, as a link to add the show to
+ *                 Google Calendar. Independent of ticketUrl/infoUrl/
+ *                 address — leave blank if the time isn't known yet.
  *   ticketUrl   - link to an actual ticket-purchase page. Most DIY/house
  *                 shows won't have one of these — leave it blank if so.
  *   infoUrl     - fallback link for shows with no ticket site: a
@@ -36,9 +44,9 @@
  *   supportedBy - optional list of other band names on the bill
  *
  * The button shown for each upcoming show follows this order: sold out
- * badge > "Tickets" (ticketUrl) > "Event Info" (infoUrl) > "Event Info
- * Coming Soon" text (neither is set yet). Past shows never show a
- * button at all.
+ * badge > "Tickets" (ticketUrl) > "Event Info" (infoUrl) > "Directions"
+ * (if an address is set) > "Event Info Coming Soon" text (nothing is set
+ * yet). Past shows never show a button at all.
  */
 import data from '../content/shows.json';
 import { slugify } from '../utils/slugify';

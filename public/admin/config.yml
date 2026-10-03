@@ -51,6 +51,20 @@ collections:
               - { name: city, label: City, widget: string }
               - { name: state, label: "State / Region", widget: string }
               - {
+                  name: address,
+                  label: "Street Address",
+                  widget: string,
+                  required: false,
+                  hint: "e.g. 2580 Haverford Rd, Ardmore, PA 19003 — shows a \"Directions\" link to Google Maps. Leave blank to skip it.",
+                }
+              - {
+                  name: time,
+                  label: "Time",
+                  widget: string,
+                  required: false,
+                  hint: "e.g. '8:00 PM' or 'Doors 7pm, Show 8pm'. Shown whenever set, as an \"add to calendar\" link — independent of the fields below.",
+                }
+              - {
                   name: ticketUrl,
                   label: "Ticket URL",
                   widget: string,

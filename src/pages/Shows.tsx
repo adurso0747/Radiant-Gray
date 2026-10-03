@@ -1,6 +1,10 @@
 import { shows } from '../data/shows';
 import { formatShowDate, isUpcoming } from '../utils/formatDate';
+import { getMapsUrl } from '../utils/maps';
+import { getCalendarUrl } from '../utils/calendar';
 import { usePageTitle } from '../hooks/usePageTitle';
+import PinMark from '../components/icons/PinMark';
+import CalendarMark from '../components/icons/CalendarMark';
 import type { Show } from '../types/content';
 import './Shows.css';
 
@@ -61,51 +65,100 @@ function ShowList({ title, showsList, emptyMessage, pastStyle = false }: ShowLis
         <p className="show-list__empty">{emptyMessage}</p>
       ) : (
         <ul className={`show-list__items ${pastStyle ? 'is-past' : ''}`.trim()}>
-          {showsList.map((show) => (
-            <li key={show.id} className="show-row">
-              <span className="show-row__date">{formatShowDate(show.date)}</span>
+          {showsList.map((show) => {
+            // When there's no ticket link and no info link, an address
+            // takes over the action column as a "Directions" button
+            // instead of plain "Event Info Coming Soon" — for a show
+            // where all that's known yet is where (and maybe when), not
+            // a ticket link or a flyer to point to. In every other case
+            // (sold out, has tickets, has an info link), the address —
+            // if there is one — shows as a small "Directions" link next
+            // to the venue instead, so it's still there without
+            // duplicating it in both places.
+            const addressIsPrimaryAction = !show.soldOut && !show.ticketUrl && !show.infoUrl && show.address;
 
-              <span className="show-row__details">
-                <span className="show-row__venue">
-                  {show.venue} — {show.city}, {show.state}
-                </span>
-                {show.supportedBy?.length > 0 && (
-                  <span className="show-row__support">with {show.supportedBy.join(', ')}</span>
-                )}
-              </span>
+            return (
+              <li key={show.id} className="show-row">
+                <span className="show-row__date">{formatShowDate(show.date)}</span>
 
-              {/* Past shows don't get a Tickets/Event Info/Coming Soon
-                  button at all — none of that is relevant once a show
-                  has already happened. */}
-              {!pastStyle && (
-                <span className="show-row__action">
-                  {show.soldOut ? (
-                    <span className="badge badge--sold-out">Sold Out</span>
-                  ) : show.ticketUrl ? (
+                <span className="show-row__details">
+                  <span className="show-row__venue">
+                    {show.venue} — {show.city}, {show.state}
+                    {show.address && !addressIsPrimaryAction && (
+                      <a
+                        href={getMapsUrl(show.address)}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="show-row__directions"
+                      >
+                        <PinMark size={12} />
+                        Directions
+                      </a>
+                    )}
+                  </span>
+                  {/* Shown whenever a time is set, independent of
+                      ticket/info/address state — knowing when doors or
+                      the show itself is matters regardless of whether
+                      there's also a ticket link. Links out to a Google
+                      Calendar "add event" prefilled from the show. */}
+                  {show.time && (
                     <a
-                      href={show.ticketUrl}
+                      href={getCalendarUrl(show)}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="btn btn--outline btn--small"
+                      className="show-row__time"
                     >
-                      Tickets
+                      <CalendarMark size={12} />
+                      {show.time}
                     </a>
-                  ) : show.infoUrl ? (
-                    <a
-                      href={show.infoUrl}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="btn btn--outline btn--small"
-                    >
-                      Event Info
-                    </a>
-                  ) : (
-                    <span className="show-row__tba">Event Info Coming Soon</span>
+                  )}
+                  {show.supportedBy?.length > 0 && (
+                    <span className="show-row__support">with {show.supportedBy.join(', ')}</span>
                   )}
                 </span>
-              )}
-            </li>
-          ))}
+
+                {/* Past shows don't get a Tickets/Event Info/Coming Soon
+                    button at all — none of that is relevant once a show
+                    has already happened. */}
+                {!pastStyle && (
+                  <span className="show-row__action">
+                    {show.soldOut ? (
+                      <span className="badge badge--sold-out">Sold Out</span>
+                    ) : show.ticketUrl ? (
+                      <a
+                        href={show.ticketUrl}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="btn btn--outline btn--small"
+                      >
+                        Tickets
+                      </a>
+                    ) : show.infoUrl ? (
+                      <a
+                        href={show.infoUrl}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="btn btn--outline btn--small"
+                      >
+                        Event Info
+                      </a>
+                    ) : addressIsPrimaryAction ? (
+                      <a
+                        href={getMapsUrl(show.address!)}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="btn btn--outline btn--small"
+                      >
+                        Directions
+                      </a>
+                    ) : (
+                      <span className="show-row__tba">Event Info Coming Soon</span>
+                    )}
+                  </span>
+                )}
+              </li>
+            );
+          })}
         </ul>
       )}
     </section>

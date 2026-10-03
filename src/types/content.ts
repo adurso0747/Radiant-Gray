@@ -44,6 +44,15 @@ export interface RawShow {
   venue: string;
   city: string;
   state: string;
+  // Street address, e.g. '2580 Haverford Rd, Ardmore, PA 19003' — shown
+  // as a "Directions" link to Google Maps when set (see
+  // src/utils/maps.ts). Independent of ticketUrl/infoUrl below; a show
+  // can have both a ticket link and an address.
+  address: string | null;
+  // Free-form, e.g. 'Doors 7pm, Show 8pm' or '8:00 PM'. Shown whenever
+  // set, as a link to add the show to Google Calendar (see
+  // src/utils/calendar.ts) — independent of ticketUrl/infoUrl/address.
+  time: string | null;
   ticketUrl: string | null;
   infoUrl: string | null;
   soldOut: boolean;

@@ -42,6 +42,26 @@
   font-weight: 600;
 }
 
+.show-row__directions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin-left: var(--space-xs);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.show-row__directions:hover,
+.show-row__directions:focus-visible {
+  color: var(--color-accent);
+}
+
 .show-row__support {
   font-family: var(--font-mono);
   font-size: 0.8rem;
@@ -52,6 +72,30 @@
   font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--color-text-soft);
+}
+
+/* A show's time, when set — links out to a Google Calendar "add event"
+   (see src/utils/calendar.ts). Own line under the venue, same small
+   mono-uppercase treatment as .show-row__directions since both are
+   small supplementary action links. */
+.show-row__time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  width: fit-content;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.show-row__time:hover,
+.show-row__time:focus-visible {
+  color: var(--color-accent);
 }
 
 /* Past shows: same layout, muted so the eye is drawn to Upcoming first */
