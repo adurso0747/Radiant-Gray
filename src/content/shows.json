@@ -6,7 +6,7 @@
       "city": "Philadelphia",
       "state": "PA",
       "address": null,
-      "time": null,
+      "time": "7:00 PM",
       "ticketUrl": null,
       "infoUrl": null,
       "soldOut": false,
@@ -21,7 +21,7 @@
       "city": "Philadelphia",
       "state": "PA",
       "address": null,
-      "time": null,
+      "time": "6:00 PM",
       "ticketUrl": null,
       "infoUrl": null,
       "soldOut": false,
@@ -66,9 +66,13 @@
       "address": "2580 Haverford Rd, Ardmore, PA 19003",
       "time": "7:00pm",
       "ticketUrl": null,
-      "infoUrl": null,
+      "infoUrl": "https://www.instagram.com/p/DePwjtbzw4B/",
       "soldOut": false,
-      "supportedBy": []
+      "supportedBy": [
+        "Charlie Ember",
+        "Ridge Runners",
+        "Perlin Noise"
+      ]
     },
     {
       "date": "2026-10-24",
@@ -78,9 +82,13 @@
       "address": null,
       "time": "6:00 PM",
       "ticketUrl": null,
-      "infoUrl": null,
+      "infoUrl": "https://www.instagram.com/p/DePzSoqFOZH/?img_index=1",
       "soldOut": false,
-      "supportedBy": []
+      "supportedBy": [
+        "Eve of Destruction",
+        "Cold Open",
+        "Power Doom Smoke Cult"
+      ]
     },
     {
       "date": "2026-10-25",
@@ -89,10 +97,13 @@
       "state": "PA",
       "address": "66 N Main St, Spring City, PA 19475",
       "time": "6:00 PM",
-      "ticketUrl": null,
+      "ticketUrl": "https://www.thegemspringcity.com/event-details/clancy-death-all-her-friends-and-radiant-gray-matinee-show",
       "infoUrl": null,
       "soldOut": false,
-      "supportedBy": []
+      "supportedBy": [
+        "Death & All Her Friends",
+        "Clancy"
+      ]
     },
     {
       "date": "2026-11-07",
@@ -101,6 +112,33 @@
       "state": "NJ",
       "address": "201 Mullica Hill Rd, Glassboro, NJ 08028",
       "time": "5:00 PM",
+      "ticketUrl": null,
+      "infoUrl": null,
+      "soldOut": false,
+      "supportedBy": []
+    },
+    {
+      "date": "2026-11-14",
+      "venue": "Tuned Up Brewery",
+      "city": "Spring City",
+      "state": "PA",
+      "address": "135 N Main St, Spring City, PA 19475",
+      "time": "7:00 PM",
+      "ticketUrl": null,
+      "infoUrl": null,
+      "soldOut": false,
+      "supportedBy": [
+        "Lo-Fi MILF",
+        "Flock of Indifference"
+      ]
+    },
+    {
+      "date": "2026-12-05",
+      "venue": "Sweeney's Station Saloon",
+      "city": "Philadelphia",
+      "state": "PA",
+      "address": "13639 Philmont Ave, Philadelphia, PA 19116",
+      "time": "6:00 PM",
       "ticketUrl": null,
       "infoUrl": null,
       "soldOut": false,
