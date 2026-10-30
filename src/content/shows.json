@@ -101,21 +101,24 @@
       "infoUrl": null,
       "soldOut": false,
       "supportedBy": [
-        "Death & All Her Friends",
+        "Standalone",
         "Clancy"
       ]
     },
     {
-      "date": "2026-11-07",
-      "venue": "Rowan University",
-      "city": "Glassboro",
-      "state": "NJ",
-      "address": "201 Mullica Hill Rd, Glassboro, NJ 08028",
-      "time": "5:00 PM",
+      "date": "2026-11-06",
+      "venue": "Dawson Street Pub",
+      "city": "Philadelphia",
+      "state": "PA",
+      "address": "100 Dawson St, Philadelphia, PA 19127",
+      "time": "7:30 PM",
       "ticketUrl": null,
-      "infoUrl": null,
+      "infoUrl": "https://www.instagram.com/p/De79FybzLjW/",
       "soldOut": false,
-      "supportedBy": []
+      "supportedBy": [
+        "Mitchell Street Philbillies",
+        "Perlin Noise"
+      ]
     },
     {
       "date": "2026-11-14",
@@ -125,7 +128,7 @@
       "address": "135 N Main St, Spring City, PA 19475",
       "time": "7:00 PM",
       "ticketUrl": null,
-      "infoUrl": null,
+      "infoUrl": "https://www.instagram.com/p/DevgcxKnJJR/",
       "soldOut": false,
       "supportedBy": [
         "Lo-Fi MILF",
